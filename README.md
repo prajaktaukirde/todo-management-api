@@ -1,98 +1,161 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Todo Management API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A secure backend REST API for a Todo application built using **NestJS**, **PostgreSQL**, and **JWT authentication**.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This project supports user authentication, role-based access control, todo management, and admin-level user management.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🚀 Tech Stack
 
-## Project setup
+- Node.js
+- NestJS
+- PostgreSQL
+- TypeORM
+- JWT Authentication
+- Swagger (OpenAPI)
 
+---
+
+## 🎯 Features
+
+### Authentication
+- User signup & login
+- Password hashing
+- JWT-based authentication
+- Logout with token invalidation
+
+### User Management
+- View own profile
+- Update own profile
+- Soft delete own account
+- Soft-deleted users cannot login
+
+### Todo Management
+- Create todos
+- Get own todos (paginated)
+- Update own todos
+- Delete own todos
+- Users cannot access others’ todos
+
+### Admin Management
+- List all users
+- Update any user
+- Soft delete any user
+- Role-based access control (ADMIN only)
+
+---
+
+## ⚙️ Local Setup
+
+### 1️⃣ Install dependencies
 ```bash
-$ pnpm install
+pnpm install
 ```
 
-## Compile and run the project
+### 2️⃣ Configure environment variables
 
-```bash
-# development
-$ pnpm run start
+Create a `.env` file in the project root:
 
-# watch mode
-$ pnpm run start:dev
+```env
+PORT=3000
 
-# production mode
-$ pnpm run start:prod
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=todo_user
+DB_PASSWORD=your_db_password
+DB_NAME=todo_db
+
+JWT_SECRET=change_me_to_random_string
+JWT_EXPIRES_IN=15m
 ```
 
-## Run tests
-
+### 3️⃣ Start the server
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+pnpm run start:dev
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## 📚 API Documentation
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+Swagger UI:
+```
+http://localhost:3000/docs
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Health check:
+```
+http://localhost:3000/health
+```
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+## 🔐 Authentication Flow (Swagger)
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+1. `POST /auth/signup` → Create user  
+2. `POST /auth/login` → Copy `accessToken`  
+3. Click **Authorize** in Swagger  
+4. Paste JWT token  
+5. Call protected APIs  
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 📌 API Endpoints
 
-## Stay in touch
+### Authentication
+- `POST /auth/signup`
+- `POST /auth/login`
+- `POST /auth/logout`
+- `GET /auth/me`
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### User APIs
+- `GET /users/me`
+- `PATCH /users/me`
+- `DELETE /users/me` (soft delete)
 
-## License
+### Todo APIs
+- `POST /todos`
+- `GET /todos?page=1&limit=10`
+- `PATCH /todos/:id`
+- `DELETE /todos/:id`
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### Admin APIs (ADMIN only)
+- `GET /admin/users`
+- `PATCH /admin/users/:id`
+- `DELETE /admin/users/:id`
+
+---
+
+## 👑 Admin Setup
+
+To promote a user to ADMIN role, run the following query in PostgreSQL:
+
+```sql
+UPDATE users SET role='ADMIN' WHERE email='your_email@test.com';
+```
+
+Login again to receive a new JWT token with ADMIN role.
+
+---
+
+## 📝 Notes
+
+- Passwords are securely hashed
+- Soft delete is implemented for users
+- JWT tokens expire after 15 minutes
+- Role-based access control enforced
+- `synchronize: true` is enabled for development only
+
+---
+
+## ✅ Project Status
+
+✔ All mandatory requirements implemented  
+✔ Plus points: NestJS, Swagger, validation, RBAC  
+
+---
+
+## 👩‍💻 Author
+
+**Prajakta Ukirde**
