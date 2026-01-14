@@ -1,9 +1,11 @@
-
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { UsersModule } from './users/users.module';
 import { TodosModule } from './todos/todos.module';
+import { AuthModule } from './auth/auth.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -20,15 +22,14 @@ import { TodosModule } from './todos/todos.module';
         password: config.get<string>('DB_PASSWORD'),
         database: config.get<string>('DB_NAME'),
         autoLoadEntities: true,
-
-        // Phase 1 dev-only (creates tables from entities automatically)
         synchronize: true,
       }),
     }),
 
     UsersModule,
-
     TodosModule,
+    AuthModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule {}
