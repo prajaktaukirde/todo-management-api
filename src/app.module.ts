@@ -6,6 +6,10 @@ import { UsersModule } from './users/users.module';
 import { TodosModule } from './todos/todos.module';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './auth/roles.guard';
+import { AuthGuard } from '@nestjs/passport';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -23,12 +27,18 @@ import { AppController } from './app.controller';
         database: config.get<string>('DB_NAME'),
         autoLoadEntities: true,
         synchronize: true,
+        providers: [
+  { provide: APP_GUARD, useClass: AuthGuard('jwt') },
+  { provide: APP_GUARD, useClass: RolesGuard },
+],
+
       }),
     }),
 
     UsersModule,
     TodosModule,
     AuthModule,
+    AdminModule,
   ],
   controllers: [AppController],
 })
